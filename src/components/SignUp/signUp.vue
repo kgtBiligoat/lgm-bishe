@@ -148,7 +148,7 @@ export default  {
                         type: 'success'
                     });
                     this.closeDialog()
-                    this.$router.push('/users')
+                    this.$router.push('/main')
                 }
             } else {
                 this.$message({

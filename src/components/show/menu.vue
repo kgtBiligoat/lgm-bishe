@@ -4,7 +4,7 @@
             <el-menu-item index="1">个人管理</el-menu-item>
             <el-menu-item index="2">表单创建</el-menu-item>
             <el-menu-item index="3">表单展示</el-menu-item>
-            <el-menu-item index="4">登出</el-menu-item>
+            <el-menu-item index="4" @click="logout">登出</el-menu-item>
         </el-menu>
     </div>
 </template>
@@ -18,6 +18,13 @@
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+      async logout() {
+        let data = await this.$store.dispatch('logout')
+        console.log(data)
+        if(data.data.status === 1) {
+            this.$router.push('/')
+        }
       }
     }
   }
