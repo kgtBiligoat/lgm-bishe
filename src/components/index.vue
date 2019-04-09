@@ -47,7 +47,7 @@ export default {
                     type: 'success'
                 });
                 setTimeout(() => {
-                    this.$router.push('/main')
+                    this.$router.push('/main/users')
                 }, 1000)
             } else {
                 this.$message({
