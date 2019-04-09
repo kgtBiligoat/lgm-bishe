@@ -1,9 +1,6 @@
 <template>
   <div class="container">
     <i-row>
-      <el-menu></el-menu>
-    </i-row>
-    <i-row>
       <i-col span="12" class="sortable_container">
         <Form :label-width="100" class="b-a">
           <draggable :clone="cloneData" :list="form_list" :options="dragOptions1">
