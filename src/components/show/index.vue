@@ -1,6 +1,6 @@
 <template>
     <div>
-        <menu-bar></menu-bar>
+        <menu-bar style="margin-bottom: 50px;"></menu-bar>
         <main-bar></main-bar>
     </div>
 </template>

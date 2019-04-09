@@ -1,12 +1,12 @@
 const mutations = {
-    setUserInfo: (state: any, payload: any) => {
+    setUserInfo: (state, payload) => {
         if(payload.data) {
-            Object.keys(payload.data).forEach((item: string) => {
+            Object.keys(payload.data).forEach((item) => {
                 state[item] = payload.data[item]
             })            
         }
     },
-    logout: (state: any) => {
+    logout: (state) => {
         state = {}   
     }
 

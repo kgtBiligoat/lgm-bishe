@@ -12,6 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import elementUI from 'element-ui'
 
 import axios from 'axios';
+import store from './store/index.js'
 
 Vue.config.productionTip = false
 Vue.use(iview);
@@ -27,6 +28,7 @@ Vue.prototype.$http = axios;
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

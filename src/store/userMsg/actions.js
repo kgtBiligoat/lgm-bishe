@@ -1,7 +1,7 @@
-import request from '@/api/index.ts'
+import request from '@/api/index.js'
 
 const actions = {
-    async signUp(context: any, payload: any) {
+    async signUp(context, payload) {
         let params = { ...payload }
         let resPayload = await request({
             method: 'post',
@@ -12,7 +12,7 @@ const actions = {
         return resPayload.data
     },
 
-    async signIn(context: any, payload: any) {
+    async signIn(context, payload) {
         let params = { 
             username: payload.username,
             password: payload.password
@@ -26,7 +26,7 @@ const actions = {
         return resPayload.data
     },
 
-    async logout(context: any) {
+    async logout(context) {
         let resPayload = await request({
             method: 'get',
             url: '/logout'
@@ -37,7 +37,7 @@ const actions = {
         return resPayload
     },
 
-    async changeUserInfo(context: any, payload: any) {
+    async changeUserInfo(context, payload) {
         let param = { ...payload }
         let resPayload = await request({
             method: 'post',
@@ -48,7 +48,7 @@ const actions = {
         return resPayload.data
     },
 
-    async check(context: any) {
+    async check(context) {
         let resPayload = await request({
             method: 'get',
             url: '/check'
