@@ -37,24 +37,25 @@ export default {
             this.$data.isSignUpShow = true;
         },
         async signIn() {
-            let param = {
-                ...this.$data
-            }
-            let data = await this.$store.dispatch('signIn', param)
-            if(data.status === 1) {                
-                this.$message({
-                    message: data.msg,
-                    type: 'success'
-                });
-                setTimeout(() => {
-                    this.$router.push('/users')
-                }, 1000)
-            } else {
-                this.$message({
-                    message: data.msg,
-                    type: 'error'
-                });            
-            }
+            // let param = {
+            //     ...this.$data
+            // }
+            // let data = await this.$store.dispatch('signIn', param)
+            // if(data.status === 1) {                
+            //     this.$message({
+            //         message: data.msg,
+            //         type: 'success'
+            //     });
+            //     setTimeout(() => {
+            //         this.$router.push('/users')
+            //     }, 1000)
+            // } else {
+            //     this.$message({
+            //         message: data.msg,
+            //         type: 'error'
+            //     });            
+            // }
+            this.$router.push('/main')
         },
         change(e) {
             console.log(e)
