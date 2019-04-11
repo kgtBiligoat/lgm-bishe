@@ -5,7 +5,7 @@
         <Form :label-width="100" class="b-a">
           <draggable :clone="cloneData" :list="form_list" :options="dragOptions1">
             <transition-group class="form-list-group" type="transition" :name="'flip-list'" tag="div">
-              <renders v-for="(element,index) in form_list" :key="index" :ele="element.ele" :obj="element.obj || {}"></renders>
+              <renders v-for="(element,index) in form_list" :key="element" :ele="element.ele" :obj="element.obj || {}"></renders>
             </transition-group>
           </draggable>
         </Form>
@@ -15,7 +15,7 @@
           <Alert style="margin: 15px 15px 0;" type="warning" show-icon>未绑定数据字典控件无效</Alert>
           <draggable :list="sortable_item" :options="dragOptions2">
             <transition-group class="form-list-group" type="transition" :name="'flip-list'" tag="div">
-              <renders @handleRemoveEle="removeEle" @handleConfEle="confEle" @changeVisibility="changeVisibility" v-for="(element,index) in sortable_item" :key="index" :index="index" :ele="element.ele" :obj="element.obj || {}" :data="formData" @handleChangeVal="val => handleChangeVal(val,element)" :sortableItem="sortable_item" :config-icon="true">
+              <renders @handleRemoveEle="removeEle" @handleConfEle="confEle" @changeVisibility="changeVisibility" v-for="(element,index) in sortable_item" :key="element" :index="index" :ele="element.ele" :obj="element.obj || {}" :data="formData" @handleChangeVal="val => handleChangeVal(val,element)" :sortableItem="sortable_item" :config-icon="true">
               </renders>
             </transition-group>
           </draggable>
@@ -46,7 +46,7 @@
           </FormItem>
           <FormItem label="关联配置：" v-if="typeof modalFormData.relation != 'undefined' && modalFormData.relation">
             <Select v-model="modalFormData.relation_name" class="inline-block" style="width: 150px" @on-change="_=>modalFormData.relation_value = ''">
-              <Option :disabled="item.obj.name == modalFormData.name" v-for="(item,index) in relationList" :key="index" :value="item.obj.name">{{item.obj.label}}</Option>
+              <Option :disabled="item.obj.name == modalFormData.name" v-for="(item,index) in relationList" :key="item" :value="item.obj.name">{{item.obj.label}}</Option>
             </Select>
             <p class="inline-block padder-sm">等于</p>
             <Select v-model="modalFormData.relation_value" class="inline-block" style="width: 150px">
