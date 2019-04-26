@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <test></test><br/>
     <i-row>
       <i-col span="12" class="sortable_container">
         <Form :label-width="100" class="b-a">
@@ -32,7 +33,6 @@
           </FormItem>
           <FormItem label="数据字典：" v-if="showModal">
             <Select v-model="modalFormData.dict" filterable @on-change="handleDataDictChange">
-              <!-- value绑定json字符串的原因是，需要用到parent_name，当handleDataDictChange触发，赋值到modalFormData -->
               <Option :disabled="dataDictSelected.indexOf(item.id) >= 0" v-for="item in dataDictList" :value="JSON.stringify({
                 id: item.id, parent_name: item.parent_name})" :key="item.id">{{ item.label }}</Option>
             </Select>
@@ -41,7 +41,6 @@
             <i-input v-model="modalFormData.name" placeholder="" disabled></i-input>
           </FormItem>
           <FormItem label="关联数据：" v-if="typeof modalFormData.relation != 'undefined'">
-            <!-- 当绑定name并且当前relationList存在数据时候才可以关联字段 -->
             <Checkbox :disabled="!modalFormData.name || !relationList.length" v-model="modalFormData.relation">是否关联字段</Checkbox>
           </FormItem>
           <FormItem label="关联配置：" v-if="typeof modalFormData.relation != 'undefined' && modalFormData.relation">
@@ -113,10 +112,12 @@
 </template>
 <script>
 import draggable from "vuedraggable";
+import test from './components/liucheng.vue'
 import form_list from "@/components/custom_form/FormList";
 export default {
   components: {
-    draggable
+    draggable,
+    test
   },
   data() {
     return {

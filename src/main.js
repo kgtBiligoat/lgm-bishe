@@ -21,6 +21,7 @@ Vue.use(custom_form);
 Vue.use(iviewArea);
 Vue.use(elementUI)
 
+
 // axios.defaults.baseURL = '/apis';
 Vue.prototype.$http = axios;
 
