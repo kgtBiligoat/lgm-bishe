@@ -1,28 +1,35 @@
 <template>
-<div class="right">
-    <div id="mountNode" ></div>   
-    <div class="test">
-        <el-form>
-            <el-form-item label="节点选择：" label-width="150px">
-                <el-select v-model="value" placeholder="请选择节点" style="width: 200px;" @change="select">
-                    <el-option
-                        v-for="item in options"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                    </el-option>   
-                </el-select>    
-            </el-form-item>    
-            <el-form-item label="节点名称：" label-width="150px" >
-                <el-input v-model="inputValue" style="width: 200px;" @change="change"></el-input>
-            </el-form-item>
-            <el-form-item style="margin-left: 100px;">
-                <el-button @click="add">新增节点</el-button>
-                <el-button @click="delet">删除节点</el-button>
-            </el-form-item>
-        </el-form>    
+<div>
+    <div class="right">
+        <div id="mountNode" ></div>   
+        <div class="test">
+            <el-form>
+                <el-form-item label="节点选择：" label-width="150px">
+                    <el-select v-model="value" placeholder="请选择节点" style="width: 200px;" @change="select">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value">
+                        </el-option>   
+                    </el-select>    
+                </el-form-item>    
+                <el-form-item label="节点名称：" label-width="150px" >
+                    <el-input v-model="inputValue" style="width: 200px;" @change="change"></el-input>
+                </el-form-item>
+                <el-form-item style="margin-left: 100px;">
+                    <el-button @click="add">新增节点</el-button>
+                    <el-button @click="delet">删除节点</el-button>
+                </el-form-item>
+            </el-form>    
+        </div> 
+    </div>   
+    <div class="down">
+        <el-button>确定</el-button>
     </div> 
+
 </div>
+
 
 </template>
 <script >
@@ -61,7 +68,8 @@ export default {
     },
     methods: {
         select() {
-            this.inputValue = this.options[this.getNumber].label          
+            this.inputValue = this.options[this.getNumber].label        
+            this.$emit('select', this.value)  
         },
         change() {
             this.data.nodes[this.getNumber].label = this.inputValue
@@ -105,7 +113,47 @@ export default {
             console.log(this.number)
         },
         delet() {
+            var temp
+            console.log(this.data.nodes, this.options, this.data.edges)
+            this.data.nodes.forEach((i, index) => {
+                if(i.id === this.value) {
+                    temp = index
 
+                }
+            })                    
+            this.data.nodes.splice(temp, 1)
+
+            this.options.forEach((i, index) => {
+                if(i.id === this.value) {
+                    temp = index
+
+                }               
+            })
+            this.options.splice(temp, 1)
+
+            this.data.edges.forEach((i, index) => {
+                if(i.source === this.value) {
+                    temp = index
+                }                   
+            })
+            if(temp === this.data.edges.length) {
+                console.log(temp, this.data.edges.length)
+                this.data.edges.pop()
+            }    
+            else {
+
+                this.data.edges.splice(temp-1, 2)
+                this.data.edges.splice(temp, 0, {
+                    source: this.options[temp - 1].value,
+                    target: this.options[temp].value
+                })
+            }
+
+            setTimeout(() => {
+                this.graph.render()
+            }, 1)
+            this.number --
+  
         }
     },
     mounted() {
@@ -122,6 +170,11 @@ export default {
 }
 </script>
 <style scoped>
+.down {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
 .el-form {
     margin-top: 10px;
 }

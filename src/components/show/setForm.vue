@@ -1,7 +1,10 @@
 <template>
   <div class="container">
-    <test></test><br/>
-    <i-row>
+    <keep-alive>
+       <test @select="select" @delet="delet"></test>    
+    </keep-alive>
+    <br/>
+    <i-row >
       <i-col span="12" class="sortable_container">
         <Form :label-width="100" class="b-a">
           <draggable :clone="cloneData" :list="form_list" :options="dragOptions1">
@@ -121,6 +124,7 @@ export default {
   },
   data() {
     return {
+      node: '',
       form_list: form_list,
       sortable_item: [],
       showModal: false,
@@ -135,10 +139,22 @@ export default {
     };
   },
   methods: {
+    delet(value) {
+      localStorage.removeItem('value')
+    },
+    select(value) {
+      this.node = value
+      this.$http.get('/static/label.json').then(d => {
+        this.dataDict = d.data.items;
+      });
+      this.sortable_item = JSON.parse(localStorage.getItem(this.node) || '[]');
+      console.log(this.node)
+      console.log(2222222222)
+    },
     // 克隆表单提交事件
     handleSubmit() {
       console.log(this.sortable_item)
-      localStorage.setItem('template_form', JSON.stringify(this.sortable_item.filter(v => {
+      localStorage.setItem(this.node, JSON.stringify(this.sortable_item.filter(v => {
         return !!v.obj.name
       })));
       // this.$router.push('/render');
@@ -301,7 +317,7 @@ export default {
     this.$http.get('/static/label.json').then(d => {
       this.dataDict = d.data.items;
     });
-    this.sortable_item = JSON.parse(localStorage.getItem('template_form') || '[]');
+    this.sortable_item = JSON.parse(localStorage.getItem(this.node) || '[]');
   },
 
 };
