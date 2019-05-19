@@ -60,7 +60,8 @@ export default {
         change(e) {
             console.log(e)
         }
-    }
+    },
+
 
 
 }

@@ -8,7 +8,8 @@ const mutations = {
     },
     logout: (state) => {
         state = {}   
-    }
+    },
+    
 
 }
 

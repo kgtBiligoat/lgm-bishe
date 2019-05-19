@@ -25,7 +25,7 @@
         </div> 
     </div>   
     <div class="down">
-        <el-button>确定</el-button>
+        <el-button @click="click">确定</el-button>
     </div> 
 
 </div>
@@ -66,7 +66,21 @@ export default {
             return Number(this.value.split('')[4])
         }
     },
+    watch: {
+        number: {
+        　　handler(newName, oldName) {
+                this.$store.state.UserMsg.number = newName
+            },
+        　　immediate: true
+        },
+    },
     methods: {
+        click() {
+            for(let i = 1; i < localStorage.length; i++){
+                this.$store.state.UserMsg.nodes.push(localStorage[localStorage.key(i)])
+            }
+            console.log(this.$store.state.UserMsg.nodes)
+        },
         select() {
             this.inputValue = this.options[this.getNumber].label        
             this.$emit('select', this.value)  
@@ -170,6 +184,12 @@ export default {
 }
 </script>
 <style scoped>
+.el-input__inner {
+    width: 200px;
+}
+input {
+    width: 200px;
+}
 .down {
     margin-top: 20px;
     display: flex;

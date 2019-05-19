@@ -5,6 +5,7 @@ import users from '@/components/show/users'
 import getForm from '@/components/show/getForm'
 import setForm from '@/components/show/setForm'
 import login from '@/components/index.vue'
+import liucheng from '@/components/show/components/showData.vue'
 
 Vue.use(Router)
 
@@ -31,7 +32,7 @@ export default new Router({
       {
         path: 'getForm',
         name: 'getForm',
-        component: getForm
+        component: liucheng
       }
     ]
   }],

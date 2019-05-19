@@ -9,7 +9,9 @@ export default {
         password: String,
         phone: Number,
         email: String,
-        sex: String
+        sex: String,
+        number: Number,
+        nodes: []
     },
     mutations,
     actions

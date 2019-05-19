@@ -24,7 +24,14 @@
           this.$router.push('/main/setForm')
         }
         else if (key === '3') {
-          this.$router.push('/main/getForm')
+          if(this.$store.state.UserMsg.nodes.length === 0) {
+            alert('无流程无法进入')
+            this.activeIndex = 2
+          }
+          else {
+            this.$router.push('/main/getForm')
+          }
+          
         }
         else {
           this.logout()

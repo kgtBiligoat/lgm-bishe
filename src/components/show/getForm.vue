@@ -4,8 +4,8 @@
         <renders v-for="(element,index) in template_form" :key="index" :index="index" :ele="element.ele" :obj="element.obj || {}" :data="formData" @handleChangeVal="val => handleChangeVal(val,element)" @changeVisibility="changeVisibility" :value="formData[element.obj.name]" :sortableItem="template_form">
         </renders>
         <FormItem>
-        <Button type="primary" @click="handleSubmit('formValidate')">Submit</Button>
-        <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
+        <Button type="primary" @click="handleSubmit('formValidate')">下一步</Button>
+        <!-- <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button> -->
         </FormItem>
     </Form>    
     </div>
@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       template_form: [],
-      formData: {}
+      formData: {},
+      number: 1,
     }
   },
   methods: {
@@ -25,15 +26,26 @@ export default {
       this.$set(this.formData, element.obj.name, val);
       // this.formData[element.obj.name] = val;
     },
+    handleReset() {
+      this.template_form = JSON.parse(localStorage.getItem('node1') || '[]');
+    },
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
-          window.localStorage.setItem('template_form', JSON.stringify(this.template_form));
+          
+          // window.localStorage.setItem('template', JSON.stringify(this.template_form));
           this.$Message.success('Success!');
-          this.$router.push('/preview');
+          let node = localStorage.key(this.number+1)
+          console.log(node)          
+          this.template_form = JSON.parse(localStorage.getItem(node) || '[]');
+          this.number++;
+          this.$emit('change', this.number)
         } else {
           this.$Message.error('Fail!');
-        }
+        }     
+      //  var node = 
+      //    console.log(node,'22', localStorage.key(1))
+      //   console.log(111111)     
       })
     },
     // 更改当前渲染字段是否显示
@@ -42,7 +54,7 @@ export default {
     }
   },
   created() {
-    this.template_form = JSON.parse(localStorage.getItem('template_form') || '[]');
+    this.template_form = JSON.parse(localStorage.getItem('node0') || '[]');
     for (let i in this.template_form) {
       this.$set(this.formData, this.template_form[i].obj.name, this.template_form[i].obj.value);
     }
